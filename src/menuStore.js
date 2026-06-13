@@ -3,7 +3,7 @@
 // "I don't care about security" — the PIN gate and this storage are client-side
 // only; edits live in the owner's browser until exported and published.
 
-import { DEFAULT_ITEMS } from "./menuData";
+import { DEFAULT_ITEMS, CATEGORIES } from "./menuData";
 
 const KEY = "zukerino_menu_v1";
 const EVT = "zukerino-menu-change";
@@ -22,6 +22,7 @@ function merge(saved) {
       desc: s.desc ?? "",
       featured: !!s.featured,
       category: s.category || d.category,
+      diets: Array.isArray(s.diets) ? s.diets : (d.diets || []),
     };
   });
 }
@@ -73,14 +74,12 @@ export function exportDataFile(items) {
         `  { id: ${JSON.stringify(i.id)}, img: ${JSON.stringify(i.img)}, ` +
         `name: ${JSON.stringify(i.name)}, price: ${JSON.stringify(i.price)}, ` +
         `desc: ${JSON.stringify(i.desc)}, featured: ${i.featured ? "true" : "false"}, ` +
-        `category: ${JSON.stringify(i.category)} },`
+        `category: ${JSON.stringify(i.category)}, diets: ${JSON.stringify(i.diets || [])} },`
     )
     .join("\n");
   return (
     `// Published Zukerino menu. Edited via /#admin and exported on ${new Date().toLocaleString()}.\n\n` +
-    `export const CATEGORIES = [\n` +
-    `  "Cakes", "Cheesecakes", "Baklava", "Cookies", "Gluten Free",\n` +
-    `  "Pastries", "Party Trays", "Pies", "Other",\n];\n\n` +
+    `export const CATEGORIES = ${JSON.stringify(CATEGORIES)};\n\n` +
     `export const DEFAULT_ITEMS = [\n${rows}\n];\n`
   );
 }

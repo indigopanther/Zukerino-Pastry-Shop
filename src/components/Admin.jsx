@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
-import { CATEGORIES } from "../menuData";
+import { CATEGORIES, DIETS } from "../menuData";
+import { DietIcon } from "../diet";
 import { loadItems, saveItems, resetItems, exportDataFile } from "../menuStore";
 
 const PIN = "30338";
@@ -56,6 +57,12 @@ export default function Admin() {
     setItems(next);
     saveItems(next);
     setSaved(true);
+  };
+
+  const toggleDiet = (id, key) => {
+    const it = items.find((i) => i.id === id);
+    const has = it.diets.includes(key);
+    update(id, "diets", has ? it.diets.filter((d) => d !== key) : [...it.diets, key]);
   };
 
   const stats = useMemo(() => ({
@@ -165,6 +172,20 @@ export default function Admin() {
                   onChange={(e) => update(it.id, "desc", e.target.value)}
                   placeholder="Short description…"
                 />
+                <div className="adm__diets">
+                  {DIETS.map((d) => (
+                    <button
+                      key={d.key}
+                      type="button"
+                      className={`adm__diet ${it.diets.includes(d.key) ? "is-on" : ""}`}
+                      onClick={() => toggleDiet(it.id, d.key)}
+                      aria-pressed={it.diets.includes(d.key)}
+                    >
+                      <DietIcon k={d.key} size={16} />
+                      {d.label}
+                    </button>
+                  ))}
+                </div>
                 <label className="adm__feat">
                   <input
                     type="checkbox"

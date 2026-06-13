@@ -1389,3 +1389,48 @@
 .adm__reset { background: none; border: 1px solid var(--line); color: var(--wine);
   padding: 9px 16px; border-radius: 999px; font-size: 0.85rem; cursor: pointer; }
 .adm__reset:hover { border-color: var(--wine); }
+
+/* ============================================================
+   DIETARY SYMBOLS — badges, menu key, admin toggles
+   ============================================================ */
+.diet { display: inline-grid; place-items: center; border-radius: 50%; flex: 0 0 auto;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.18); }
+.diet svg { display: block; }
+
+/* badges on public menu cards */
+.mi__diets { display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap; }
+
+/* the menu key / legend */
+.menu__key { display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+  gap: 8px 16px; max-width: 760px; margin: 0 auto 26px; padding: 12px 18px;
+  background: var(--ivory); border: 1px solid var(--line); border-radius: 16px; }
+.menu__key-label { font-weight: 700; font-size: 0.72rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--espresso-soft); }
+.menu__key-item { display: inline-flex; align-items: center; gap: 7px; font-size: 0.85rem;
+  font-weight: 600; color: var(--espresso-soft); }
+
+/* admin diet toggles */
+.adm__diets { display: flex; flex-wrap: wrap; gap: 6px; }
+.adm__diet { display: inline-flex; align-items: center; gap: 6px; font-size: 0.78rem; font-weight: 600;
+  color: var(--espresso-soft); background: #fff; border: 1px solid var(--line); border-radius: 999px;
+  padding: 7px 11px; cursor: pointer; line-height: 1; }
+.adm__diet:hover { border-color: var(--gold-soft); }
+.adm__diet.is-on { background: #eef5ea; border-color: #9cc090; color: #2f5f33; }
+.adm__diet .diet { box-shadow: none; }
+
+/* ============================================================
+   ADMIN — extra mobile polish
+   ============================================================ */
+@media (max-width: 560px) {
+  .adm__bar-in { padding: 10px 14px; }
+  .adm__title { font-size: 1.1rem; }
+  .adm__btn { padding: 10px 14px; }            /* bigger tap targets */
+  .adm__body { padding-left: 2px; padding-right: 2px; }
+  .adm__card { grid-template-columns: 76px 1fr; gap: 10px; padding: 10px; }
+  .adm__photo { width: 76px; height: 76px; }
+  /* 16px inputs stop iOS from auto-zooming on focus */
+  .adm__fields input, .adm__fields select, .adm__fields textarea { font-size: 16px; padding: 10px; }
+  .adm__line { flex-direction: column; }
+  .adm__diet { padding: 9px 12px; font-size: 0.82rem; }
+  .adm__feat { padding: 4px 0; font-size: 0.95rem; }
+}

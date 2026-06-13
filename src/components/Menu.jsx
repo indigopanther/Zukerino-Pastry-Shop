@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { CATEGORIES } from "../menuData";
+import { DietIcon, MenuKey } from "../diet";
 import { loadItems, subscribe } from "../menuStore";
 import { business } from "../data";
 
@@ -16,6 +17,11 @@ function ItemCard({ item }) {
           {item.price && <span className="mi__price">{item.price}</span>}
         </div>
         {item.desc && <p className="mi__desc">{item.desc}</p>}
+        {item.diets && item.diets.length > 0 && (
+          <div className="mi__diets">
+            {item.diets.map((k) => <DietIcon key={k} k={k} size={22} />)}
+          </div>
+        )}
       </div>
     </article>
   );
@@ -48,6 +54,8 @@ export default function Menu() {
     );
   }
 
+  const hasDiets = filled.some((i) => i.diets && i.diets.length);
+
   const sections = [
     ...(featured.length ? [{ name: "Featured", items: featured, id: "featured" }] : []),
     ...cats.map((c) => ({ ...c, id: c.name.toLowerCase().replace(/\s+/g, "-") })),
@@ -69,6 +77,8 @@ export default function Menu() {
             Baked here, from scratch. Prices are in-store — call to order anything ahead.
           </p>
         </div>
+
+        {hasDiets && <MenuKey />}
 
         <nav className="menu__nav" aria-label="Menu categories">
           {sections.map((s) => (
