@@ -2,7 +2,7 @@ import { specialties } from "../data";
 
 export default function Specialties() {
   return (
-    <section id="menu" className="section specialties">
+    <section id="favorites" className="section specialties">
       <div className="container">
         <div className="specialties__head reveal">
           <p className="eyebrow">From Our Cases</p>

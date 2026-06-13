@@ -1140,3 +1140,174 @@
     transform: none;
   }
 }
+
+/* ============================================================
+   MENU
+   ============================================================ */
+.menu { background: linear-gradient(180deg, var(--cream), var(--cream-deep)); }
+.menu__head { text-align: center; max-width: 720px; margin: 0 auto 26px; }
+
+/* Category chip nav — sticks under the navbar, scrolls on mobile */
+.menu__nav {
+  position: sticky;
+  top: 62px;
+  z-index: 20;
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 12px 4px;
+  margin: 0 -4px 28px;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  background: color-mix(in srgb, var(--cream) 86%, transparent);
+  backdrop-filter: blur(8px);
+}
+.menu__nav::-webkit-scrollbar { display: none; }
+.menu__chip {
+  flex: 0 0 auto;
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--espresso-soft);
+  background: var(--ivory);
+  border: 1px solid var(--line);
+  padding: 9px 16px;
+  border-radius: 999px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.menu__chip:hover { border-color: var(--gold-soft); }
+.menu__chip.is-active {
+  background: var(--espresso);
+  color: var(--ivory);
+  border-color: var(--espresso);
+}
+
+.menu__cat { scroll-margin-top: 120px; margin-bottom: 54px; }
+.menu__cat-head { margin-bottom: 20px; }
+.menu__cat-title {
+  font-family: var(--serif);
+  font-size: clamp(1.7rem, 4vw, 2.3rem);
+  color: var(--espresso);
+  display: inline-block;
+  border-bottom: 2px solid var(--gold-soft);
+  padding-bottom: 6px;
+}
+.menu__cat-blurb { color: var(--cocoa); margin-top: 10px; max-width: 640px; }
+
+.menu__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+@media (min-width: 560px) { .menu__grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 960px) { .menu__grid { grid-template-columns: repeat(3, 1fr); } }
+
+/* Item card */
+.mi {
+  display: flex;
+  flex-direction: column;
+  background: var(--ivory);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.mi:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: var(--gold-soft); }
+.mi__media { position: relative; aspect-ratio: 4 / 3; background: var(--cream-deep); }
+.mi__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.mi__placeholder {
+  width: 100%; height: 100%;
+  display: grid; place-items: center;
+  background:
+    radial-gradient(circle at 30% 30%, var(--cream), var(--cream-deep));
+}
+.mi__placeholder span {
+  font-family: var(--serif);
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--gold);
+  opacity: 0.6;
+}
+.mi__tag {
+  position: absolute;
+  top: 10px; left: 10px;
+  font-family: var(--sans);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ivory);
+  background: var(--wine);
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+.mi__body { padding: 14px 16px 18px; display: flex; flex-direction: column; gap: 6px; }
+.mi__row { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+.mi__name { font-family: var(--serif); font-size: 1.18rem; line-height: 1.2; color: var(--text-h); }
+.mi__price {
+  flex: 0 0 auto;
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 0.98rem;
+  color: var(--gold-deep);
+}
+.mi__meta { font-family: var(--sans); font-size: 0.74rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--cocoa); }
+.mi__desc { color: var(--text); font-size: 0.92rem; line-height: 1.5; }
+
+/* Flavor chip lists */
+.menu__flavors { margin-top: 22px; }
+.menu__flavors-label {
+  display: block;
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--espresso-soft);
+  margin-bottom: 10px;
+}
+.menu__chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.menu__flavor {
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  color: var(--espresso-soft);
+  background: var(--ivory);
+  border: 1px solid var(--line);
+  padding: 6px 12px;
+  border-radius: 999px;
+}
+
+/* Cake designs strip */
+.menu__designs { margin-top: 24px; }
+.menu__designs-scroll {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+.menu__designs-scroll img {
+  flex: 0 0 auto;
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  scroll-snap-align: start;
+  box-shadow: var(--shadow-sm);
+}
+
+.menu__note {
+  margin-top: 18px;
+  font-style: italic;
+  color: var(--cocoa);
+  font-size: 0.95rem;
+}
+.menu__cta { text-align: center; margin-top: 30px; color: var(--espresso-soft); }
+.menu__cta a { color: var(--gold-deep); font-weight: 700; text-decoration: none; border-bottom: 1px solid var(--gold-soft); }

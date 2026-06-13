@@ -81,16 +81,20 @@ export const isVideo = (src) =>
 export const heroVideo = null;
 
 export const gallery = [
-  "zukerino-pastry-shop-AF1QipMGtwn-IssT5QcaZ0q8dSl6SJPiOCYpiEyOhdOh.jpg",
-  "zukerino-pastry-shop-AF1QipMTxTf4TY35hTlK6oJk9C-zKn5IXNw4L5KDwBVE.jpg",
-  "zukerino-pastry-shop-AF1QipOqSILfn-wKUqk7c9jlSNu2y8-hmTIrWEtRZO2l.jpg",
-  "zukerino-pastry-shop-AF1QipPl7tI4-1h6ZKJPqjKy0zIC1yq-KcsO5qYAEJ7N.jpg",
-  "zukerino-pastry-shop-AF1QipPvbBGEmFXR3yV9J9uESE0Sf_2DOT9eyGkUisAP.jpg",
-  "zukerino-pastry-shop-AF1QipPTP8Gur5EYu2gnsnT1Rd4SBzwI1bE9SaerYe4N.jpg",
-  "zukerino-pastry-shop-AF1QipOONKUORO6nzjLgaMTvdQv-jUlMs7-p-dL7UIpO.jpg",
-].map((f) => photoBase + f);
+  "/img/place/DSC_1817.jpg", // display case with flowers
+  "/img/place/DSC_1821.jpg", // celebration sheet cake
+  "/img/place/DSC_1816.jpg", // interior case (About main)
+  "/img/place/DSC_1827.jpg", // Zukerino storefront sign
+  "/img/place/DSC_1820.jpg", // behind the counter
+  "/img/place/DSC_1825.jpg", // exterior patio (About sub)
+  "/img/place/DSC_1826.jpg", // Z wall art
+  "/img/place/DSC_1829.jpg", // patio seating
+  "/img/place/DSC_1819.jpg", // cases
+  "/img/place/DSC_1818.jpg", // shelves
+  "/img/place/DSC_1828.jpg", // storefront
+];
 
-export const heroImage = gallery[0];
+export const heroImage = "/img/place/DSC_1822.jpg";
 
 export const reviews = [
   {

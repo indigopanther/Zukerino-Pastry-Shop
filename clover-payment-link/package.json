@@ -1,0 +1,9 @@
+{
+  "name": "zukerino-clover-payment-link",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Generate Clover Hosted Checkout payment links for Zukerino Pastry Shop.",
+  "engines": {
+    "node": ">=18"
+  }
+}
