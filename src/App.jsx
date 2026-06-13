@@ -1,4 +1,6 @@
+import { useEffect, useState } from "react";
 import useReveal from "./hooks/useReveal";
+import Admin from "./components/Admin";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
@@ -11,8 +13,23 @@ import Footer from "./components/Footer";
 import PastryCurtain from "./components/PastryCurtain";
 import "./App.css";
 
+function useHashRoute() {
+  const [hash, setHash] = useState(() => (typeof window !== "undefined" ? window.location.hash : ""));
+  useEffect(() => {
+    const on = () => setHash(window.location.hash);
+    window.addEventListener("hashchange", on);
+    return () => window.removeEventListener("hashchange", on);
+  }, []);
+  return hash;
+}
+
 function App() {
   useReveal();
+  const hash = useHashRoute();
+
+  if (hash.replace(/^#/, "").toLowerCase().startsWith("admin")) {
+    return <Admin />;
+  }
 
   return (
     <>

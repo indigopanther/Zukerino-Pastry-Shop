@@ -1,32 +1,20 @@
-import { useState } from "react";
-import { menu, cakeGallery } from "../menu";
+import { useEffect, useState } from "react";
+import { CATEGORIES } from "../menuData";
+import { loadItems, subscribe } from "../menuStore";
 import { business } from "../data";
 
 function ItemCard({ item }) {
   return (
     <article className="mi">
       <div className="mi__media">
-        {item.img ? (
-          <img src={item.img} alt={item.name} loading="lazy" />
-        ) : (
-          <div className="mi__placeholder" aria-hidden="true">
-            <span>Z</span>
-          </div>
-        )}
-        {item.tag && <span className="mi__tag">{item.tag}</span>}
+        <img src={item.img} alt={item.name} loading="lazy" />
+        {item.featured && <span className="mi__tag mi__tag--star">★ Featured</span>}
       </div>
       <div className="mi__body">
         <div className="mi__row">
           <h4 className="mi__name">{item.name}</h4>
-          <span className="mi__price">{item.price}</span>
+          {item.price && <span className="mi__price">{item.price}</span>}
         </div>
-        {(item.unit || item.sub) && (
-          <p className="mi__meta">
-            {item.unit && <span>{item.unit}</span>}
-            {item.unit && item.sub && " · "}
-            {item.sub && <span>{item.sub}</span>}
-          </p>
-        )}
         {item.desc && <p className="mi__desc">{item.desc}</p>}
       </div>
     </article>
@@ -34,16 +22,41 @@ function ItemCard({ item }) {
 }
 
 export default function Menu() {
-  const [active, setActive] = useState(menu[0].id);
+  const [items, setItems] = useState(loadItems);
+  useEffect(() => subscribe(setItems), []);
+
+  const filled = items.filter((i) => i.name.trim());
+  const featured = filled.filter((i) => i.featured);
+  const cats = CATEGORIES
+    .map((name) => ({ name, items: filled.filter((i) => i.category === name) }))
+    .filter((c) => c.items.length);
+
+  if (!filled.length) {
+    return (
+      <section id="menu" className="section menu">
+        <div className="container">
+          <div className="menu__head reveal">
+            <p className="eyebrow">The Menu</p>
+            <h2 className="section-title">Menu coming soon</h2>
+            <p className="section-lead">
+              We're putting our full menu together. In the meantime, call{" "}
+              <a href={business.phoneHref}>{business.phone}</a> — we're happy to help.
+            </p>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  const sections = [
+    ...(featured.length ? [{ name: "Featured", items: featured, id: "featured" }] : []),
+    ...cats.map((c) => ({ ...c, id: c.name.toLowerCase().replace(/\s+/g, "-") })),
+  ];
 
   const jump = (e, id) => {
     e.preventDefault();
-    setActive(id);
     const el = document.getElementById("cat-" + id);
-    if (el) {
-      const y = el.getBoundingClientRect().top + window.scrollY - 96;
-      window.scrollTo({ top: y, behavior: "smooth" });
-    }
+    if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 96, behavior: "smooth" });
   };
 
   return (
@@ -53,67 +66,34 @@ export default function Menu() {
           <p className="eyebrow">The Menu</p>
           <h2 className="section-title">Everything in the case</h2>
           <p className="section-lead">
-            Cakes, cheesecakes, baklava, cookies, pastries, and pies — all baked here,
-            from scratch. Prices are in-store; call to order anything ahead.
+            Baked here, from scratch. Prices are in-store — call to order anything ahead.
           </p>
         </div>
 
         <nav className="menu__nav" aria-label="Menu categories">
-          {menu.map((cat) => (
-            <a
-              key={cat.id}
-              href={`#cat-${cat.id}`}
-              className={`menu__chip ${active === cat.id ? "is-active" : ""}`}
-              onClick={(e) => jump(e, cat.id)}
-            >
-              {cat.name}
+          {sections.map((s) => (
+            <a key={s.id} href={`#cat-${s.id}`} className="menu__chip" onClick={(e) => jump(e, s.id)}>
+              {s.name}
             </a>
           ))}
         </nav>
 
-        {menu.map((cat) => (
-          <div key={cat.id} id={`cat-${cat.id}`} className="menu__cat reveal">
+        {sections.map((s) => (
+          <div key={s.id} id={`cat-${s.id}`} className="menu__cat reveal">
             <div className="menu__cat-head">
-              <h3 className="menu__cat-title">{cat.name}</h3>
-              {cat.blurb && <p className="menu__cat-blurb">{cat.blurb}</p>}
+              <h3 className="menu__cat-title">{s.name}</h3>
             </div>
-
             <div className="menu__grid">
-              {cat.items.map((item) => (
-                <ItemCard key={item.name + item.price} item={item} />
+              {s.items.map((item) => (
+                <ItemCard key={item.id} item={item} />
               ))}
             </div>
-
-            {cat.flavors && (
-              <div className="menu__flavors">
-                <span className="menu__flavors-label">{cat.flavorLabel}</span>
-                <div className="menu__chips">
-                  {cat.flavors.map((f) => (
-                    <span key={f} className="menu__flavor">{f}</span>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {cat.id === "cakes" && (
-              <div className="menu__designs">
-                <span className="menu__flavors-label">A few of our cake designs</span>
-                <div className="menu__designs-scroll">
-                  {cakeGallery.map((src, i) => (
-                    <img key={src} src={src} alt={`Zukerino cake design ${i + 1}`} loading="lazy" />
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {cat.note && <p className="menu__note">{cat.note}</p>}
           </div>
         ))}
 
         <p className="menu__cta reveal">
           Want something for a birthday or party?{" "}
-          <a href={business.phoneHref}>Call {business.phone}</a> — they're quick, even on
-          short notice.
+          <a href={business.phoneHref}>Call {business.phone}</a> — quick, even on short notice.
         </p>
       </div>
     </section>

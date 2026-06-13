@@ -63,7 +63,11 @@ export default function Footer() {
 
       <div className="footer__bar">
         <div className="container footer__bar-inner">
-          <span>© {new Date().getFullYear()} {business.fullName}. All rights reserved.</span>
+          <span>
+            © {new Date().getFullYear()} {business.fullName}. All rights reserved.
+            {" · "}
+            <a href="#admin" className="footer__owner">Menu manager</a>
+          </span>
           <span className="footer__credits">
             <span>Baked in {business.location}, {hours.filter((h) => !h.closed).length} days a week</span>
             <a
