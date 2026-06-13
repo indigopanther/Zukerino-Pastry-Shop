@@ -176,6 +176,23 @@
     transform: scale(1);
   }
 }
+/* Rotating hero slides — stacked, crossfading */
+.hero__bg img.hero__slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: scale(1.06);
+  animation: none;
+  transition: opacity 1.5s ease-in-out;
+}
+.hero__bg img.hero__slide.is-active {
+  opacity: 1;
+  animation: heroZoom 9s ease-out forwards;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero__bg img.hero__slide { transition: opacity 0.4s ease; }
+  .hero__bg img.hero__slide.is-active { animation: none; transform: none; }
+}
 .hero__veil {
   position: absolute;
   inset: 0;
@@ -1434,3 +1451,6 @@
   .adm__diet { padding: 9px 12px; font-size: 0.82rem; }
   .adm__feat { padding: 4px 0; font-size: 0.95rem; }
 }
+
+/* What's in the case — CTA button */
+.specialties__cta { text-align: center; margin-top: 34px; }

@@ -27,10 +27,9 @@ export default function Specialties() {
           ))}
         </div>
 
-        <p className="specialties__note reveal">
-          Need a cake for something? <a href="#visit">Call the shop</a> — they're quick,
-          even on short notice.
-        </p>
+        <div className="specialties__cta reveal">
+          <a href="#menu" className="btn btn-primary">View the Full Menu</a>
+        </div>
       </div>
     </section>
   );

@@ -30,40 +30,31 @@ export const hours = [
 
 export const specialties = [
   {
+    name: "Cakes",
+    desc: "Custom rounds and sheet cakes, decorated to order for birthdays and big days.",
+    tag: "Made to Order",
+  },
+  {
     name: "Baklava",
-    desc: "Honey, nuts, and more phyllo layers than anyone's counted. If the pistachio one is in the case, get it.",
+    desc: "Honey, nuts, and more flaky phyllo layers than anyone's counted.",
     tag: "Signature",
   },
   {
-    name: "Cheesecake",
-    desc: "Creamy, not too sweet, no gimmicks. The one people drive back across town for.",
-    tag: "Customer Favorite",
-  },
-  {
-    name: "Tiramisu Cake",
-    desc: "Espresso-soaked layers and a generous hand with the mascarpone.",
+    name: "Cookies",
+    desc: "Greek and Italian classics — kourabiethes, biscotti, butter cookies, and more.",
   },
   {
     name: "Cannoli",
     desc: "Crisp shells, filled when you order so they never go soft.",
   },
   {
-    name: "Chocolate Mousse Cake",
-    desc: "Light enough to finish the slice. Rich enough to think about it later.",
+    name: "Cheesecakes",
+    desc: "Creamy and not too sweet, in a long list of flavors.",
+    tag: "Customer Favorite",
   },
   {
-    name: "Celebration Cakes",
-    desc: "Birthday and occasion cakes, decorated to order. Call even if the party is this weekend.",
-    tag: "Made to Order",
-  },
-  {
-    name: "Spanakopita",
-    desc: "Spinach and feta in crackling phyllo — the savory break between sweets.",
-    tag: "Savory",
-  },
-  {
-    name: "Fresh-Baked Cookies & Breads",
-    desc: "Cookies, breads, and whatever else came out of the oven that morning.",
+    name: "Pastries & Pies",
+    desc: "Eclairs, turnovers, galaktoboureko, and fresh-baked pies.",
   },
 ];
 

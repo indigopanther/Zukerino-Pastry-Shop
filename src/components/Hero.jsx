@@ -1,7 +1,20 @@
+import { useEffect, useState } from "react";
 import { business, heroImage, heroVideo, gallery, isVideo } from "../data";
+
+// Rotating background images for the landing hero (first unique, non-video shots).
+const heroSlides = [heroImage, ...gallery]
+  .filter((s, i, a) => s && !isVideo(s) && a.indexOf(s) === i)
+  .slice(0, 6);
 
 export default function Hero() {
   const bgVideo = heroVideo || (isVideo(heroImage) ? heroImage : null);
+  const [idx, setIdx] = useState(0);
+
+  useEffect(() => {
+    if (bgVideo || heroSlides.length < 2) return;
+    const id = setInterval(() => setIdx((i) => (i + 1) % heroSlides.length), 5000);
+    return () => clearInterval(id);
+  }, [bgVideo]);
 
   return (
     <section id="top" className="hero">
@@ -16,7 +29,15 @@ export default function Hero() {
             poster={!isVideo(heroImage) ? heroImage : undefined}
           />
         ) : (
-          <img src={heroImage} alt="" />
+          heroSlides.map((src, i) => (
+            <img
+              key={src}
+              src={src}
+              alt=""
+              className={`hero__slide ${i === idx ? "is-active" : ""}`}
+              loading={i === 0 ? "eager" : "lazy"}
+            />
+          ))
         )}
         <div className="hero__veil"></div>
       </div>
