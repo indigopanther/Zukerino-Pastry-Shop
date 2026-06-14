@@ -1,5 +1,9 @@
-// Business data for Zukerino Pastry Shop
-// Sourced from the shop's public listing.
+// Business data for Zukerino Pastry Shop.
+// Content reflects the client's redesign requests:
+//  - family-OWNED (not family-run), wholesale & retail pastry shop
+//  - custom cakes available upon phone request (not "short notice")
+//  - cheesecakes in almost all of our cake flavors
+//  - teal-blue highlights driven by the `teal` flags below
 
 export const business = {
   name: "Zukerino",
@@ -15,8 +19,15 @@ export const business = {
     "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3310.776484149824!2d-84.2975177!3d33.9211518!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88f50991e0f1afbb%3A0xde624ed2a8ad6a34!2sZukerino%20Pastry%20Shop!5e0!3m2!1sen!2s!4v1735828621895!5m2!1sen!2s",
 };
 
-export const intro =
-  "Zukerino is a small, family-owned pastry shop on Cotillion Drive. The recipes are Greek and Italian — baklava, cannoli, tiramisu, spanakopita — and everything in the case was baked here that morning. Custom cakes too, often on surprisingly short notice.";
+// Primary navigation, shared by the navbar and the footer.
+export const NAV_LINKS = [
+  { href: "#about", label: "Our Story" },
+  { href: "#favorites", label: "Specialties" },
+  { href: "#menu", label: "Menu" },
+  { href: "#gallery", label: "Gallery" },
+  { href: "#reviews", label: "Reviews" },
+  { href: "#visit", label: "Visit" },
+];
 
 export const hours = [
   { day: "Monday", time: "9:00 AM – 6:00 PM" },
@@ -28,11 +39,14 @@ export const hours = [
   { day: "Sunday", time: "Closed", closed: true },
 ];
 
+// `teal` flag drives the teal-blue highlight the client asked for.
 export const specialties = [
   {
-    name: "Cakes",
-    desc: "Custom rounds and sheet cakes, decorated to order for birthdays and big days.",
-    tag: "Made to Order",
+    name: "Custom Cakes",
+    desc: "Rounds, sheets, and tiers decorated to order for birthdays and big days — available upon phone request.",
+    tag: "By Phone Request",
+    teal: true,
+    feature: true,
   },
   {
     name: "Baklava",
@@ -40,17 +54,18 @@ export const specialties = [
     tag: "Signature",
   },
   {
-    name: "Cookies",
-    desc: "Greek and Italian classics — kourabiethes, biscotti, butter cookies, and more.",
+    name: "Cheesecakes",
+    desc: "Creamy and not too sweet — made in almost all of our cake flavors.",
+    tag: "Customer Favorite",
+    teal: true,
   },
   {
     name: "Cannoli",
     desc: "Crisp shells, filled when you order so they never go soft.",
   },
   {
-    name: "Cheesecakes",
-    desc: "Creamy and not too sweet, in a long list of flavors.",
-    tag: "Customer Favorite",
+    name: "Cookies",
+    desc: "Greek and Italian classics — kourabiethes, biscotti, butter cookies, and more.",
   },
   {
     name: "Pastries & Pies",
@@ -58,34 +73,32 @@ export const specialties = [
   },
 ];
 
-export const photoBase = "https://place.com-photos.com/82307/";
-
 // Detects whether a media URL points to a video so the gallery/hero can
 // render a <video> player instead of an <img>.
 export const isVideo = (src) =>
   typeof src === "string" && /\.(mp4|webm|ogg|mov|m4v)(\?.*)?$/i.test(src);
 
-// The shop's public listing only provided photos. To add a video, simply drop
-// a URL (or local file path imported above) ending in .mp4/.webm into the
-// `gallery` array below, or set `heroVideo` — both will play automatically.
-// Example: "https://example.com/zukerino-tour.mp4",
-export const heroVideo = null;
-
 export const gallery = [
-  "/img/place/DSC_1817.jpg", // display case with flowers
-  "/img/place/DSC_1821.jpg", // celebration sheet cake
-  "/img/place/DSC_1816.jpg", // interior case (About main)
-  "/img/place/DSC_1827.jpg", // Zukerino storefront sign
-  "/img/place/DSC_1820.jpg", // behind the counter
-  "/img/place/DSC_1825.jpg", // exterior patio (About sub)
-  "/img/place/DSC_1826.jpg", // Z wall art
-  "/img/place/DSC_1829.jpg", // patio seating
-  "/img/place/DSC_1819.jpg", // cases
-  "/img/place/DSC_1818.jpg", // shelves
-  "/img/place/DSC_1828.jpg", // storefront
+  "/img/place/DSC_1817.jpg",
+  "/img/place/DSC_1821.jpg",
+  "/img/place/DSC_1816.jpg",
+  "/img/place/DSC_1827.jpg",
+  "/img/place/DSC_1820.jpg",
+  "/img/place/DSC_1825.jpg",
+  "/img/place/DSC_1826.jpg",
+  "/img/place/DSC_1829.jpg",
+  "/img/place/DSC_1819.jpg",
+  "/img/place/DSC_1818.jpg",
+  "/img/place/DSC_1828.jpg",
 ];
 
-export const heroImage = "/img/place/DSC_1822.jpg";
+export const heroSlides = [
+  "/img/place/DSC_1822.jpg",
+  "/img/place/DSC_1816.jpg",
+  "/img/place/DSC_1821.jpg",
+  "/img/place/DSC_1827.jpg",
+  "/img/place/DSC_1817.jpg",
+];
 
 export const reviews = [
   {
@@ -122,12 +135,13 @@ export const reviews = [
     name: "Martin Egger",
     rating: 5,
     date: "8 months ago",
-    text: "Ordered the crazy cake for a birthday — absolutely delicious and ready on short notice. Very friendly and sweet service. Definitely recommend and will be back for more!",
+    text: "Ordered a custom cake for a birthday — absolutely delicious and the friendliest, sweetest service. Definitely recommend and will be back for more!",
   },
 ];
 
+// Stats row under the story. teal:true → highlighted teal-blue per client.
 export const highlights = [
-  { stat: "Family-run", label: "Same family behind the counter every day" },
-  { stat: "Baked daily", label: "The cases are filled fresh each morning" },
-  { stat: "Short notice", label: "Custom cakes, sometimes same-day" },
+  { stat: "Family owned", label: "The same family behind the counter every day", teal: true },
+  { stat: "Baked daily", label: "Our cases are filled fresh each morning", teal: true },
+  { stat: "Wholesale & retail", label: "Serving Atlanta by the tray or by the slice", teal: false },
 ];

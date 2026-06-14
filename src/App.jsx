@@ -3,6 +3,7 @@ import useReveal from "./hooks/useReveal";
 import Admin from "./components/Admin";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
+import Marquee from "./components/Marquee";
 import About from "./components/About";
 import Specialties from "./components/Specialties";
 import Menu from "./components/Menu";
@@ -10,7 +11,6 @@ import Gallery from "./components/Gallery";
 import Reviews from "./components/Reviews";
 import Visit from "./components/Visit";
 import Footer from "./components/Footer";
-import PastryCurtain from "./components/PastryCurtain";
 import "./App.css";
 
 function useHashRoute() {
@@ -36,6 +36,7 @@ function App() {
       <Navbar />
       <main>
         <Hero />
+        <Marquee />
         <About />
         <Specialties />
         <Menu />
@@ -44,7 +45,6 @@ function App() {
         <Visit />
       </main>
       <Footer />
-      <PastryCurtain />
     </>
   );
 }

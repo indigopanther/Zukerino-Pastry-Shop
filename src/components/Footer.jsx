@@ -1,32 +1,20 @@
-import { business, hours } from "../data";
-import Logo from "./Logo";
-import { navigateWithCurtain } from "../curtain";
-
-const navLinks = [
-  { href: "#about", label: "About" },
-  { href: "#menu", label: "Menu" },
-  { href: "#gallery", label: "Gallery" },
-  { href: "#reviews", label: "Reviews" },
-  { href: "#visit", label: "Visit" },
-];
+import { business, NAV_LINKS } from "../data";
 
 export default function Footer() {
   return (
     <footer className="footer">
       <div className="container footer__grid">
         <div className="footer__brand">
-          <Logo tagline className="footer__logo" />
+          <img className="footer__logo" src="/assets/zukerino-light.png" alt="Zukerino Pastry Shop" />
           <p className="footer__addr">{business.address}</p>
         </div>
 
         <div className="footer__col">
           <h4>Explore</h4>
           <ul>
-            {navLinks.map((l) => (
+            {NAV_LINKS.map((l) => (
               <li key={l.href}>
-                <a href={l.href} onClick={(e) => navigateWithCurtain(e, l.href)}>
-                  {l.label}
-                </a>
+                <a href={l.href}>{l.label}</a>
               </li>
             ))}
           </ul>
@@ -37,7 +25,7 @@ export default function Footer() {
           <ul className="footer__hours">
             <li>
               <span>Mon – Sat</span>
-              <span>9:00 AM – 6:00 PM</span>
+              <span>9–6</span>
             </li>
             <li>
               <span>Sunday</span>
@@ -57,6 +45,9 @@ export default function Footer() {
                 Get Directions
               </a>
             </li>
+            <li>
+              <a href="#menu">Custom cakes</a>
+            </li>
           </ul>
         </div>
       </div>
@@ -69,7 +60,7 @@ export default function Footer() {
             <a href="#admin" className="footer__owner">Menu manager</a>
           </span>
           <span className="footer__credits">
-            <span>Baked in {business.location}, {hours.filter((h) => !h.closed).length} days a week</span>
+            <span>Wholesale &amp; retail · Baked fresh in {business.location}</span>
             <a
               href="https://www.figmentimaginative.com/go/zukerino-footer"
               target="_blank"

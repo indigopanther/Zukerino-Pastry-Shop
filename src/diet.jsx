@@ -62,7 +62,7 @@ export function DietIcon({ k, size = 22 }) {
 export function MenuKey() {
   return (
     <div className="menu__key" aria-label="Dietary key">
-      <span className="menu__key-label">Key:</span>
+      <span className="menu__key-label">Key</span>
       {DIETS.map((d) => (
         <span key={d.key} className="menu__key-item">
           <DietIcon k={d.key} size={20} />

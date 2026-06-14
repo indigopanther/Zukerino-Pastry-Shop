@@ -11,7 +11,7 @@ export const CATEGORIES = [
 export const DIETS = [
   { key: "gluten-free", label: "Gluten-Free", color: "#7a8b2e" },
   { key: "vegan", label: "Vegan", color: "#3f7d4f" },
-  { key: "dairy-free", label: "Dairy-Free", color: "#2a8fa0" },
+  { key: "dairy-free", label: "Dairy-Free", color: "#047e96" },
   { key: "non-gmo", label: "Non-GMO", color: "#4a7c3f" },
 ];
 

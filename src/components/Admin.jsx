@@ -23,7 +23,7 @@ function Gate({ onUnlock }) {
   return (
     <div className="adm__gate">
       <form className="adm__gate-card" onSubmit={submit}>
-        <div className="adm__lock" aria-hidden="true">🔒</div>
+        <img className="adm__gate-logo" src="/assets/zukerino-dark.png" alt="Zukerino" />
         <h1>Menu Manager</h1>
         <p>Enter the PIN to manage the Zukerino menu.</p>
         <input

@@ -1,13 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { gallery, isVideo } from "../data";
+import { gallery } from "../data";
 
 export default function Gallery() {
   const [index, setIndex] = useState(null);
   const open = index !== null;
-  const closeBtn = useRef(null);
   const touchX = useRef(null);
 
-  const show = (i) => setIndex(i);
   const close = useCallback(() => setIndex(null), []);
   const prev = useCallback(
     () => setIndex((i) => (i + gallery.length - 1) % gallery.length),
@@ -24,7 +22,6 @@ export default function Gallery() {
     };
     window.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
-    closeBtn.current?.focus();
     return () => {
       window.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
@@ -54,36 +51,19 @@ export default function Gallery() {
         </div>
 
         <div className="gallery__grid reveal">
-          {gallery.map((src, i) => {
-            const video = isVideo(src);
-            return (
-              <button
-                key={src}
-                className={`gallery__item gallery__item--${(i % 5) + 1}`}
-                onClick={() => show(i)}
-                aria-label={`View ${video ? "video" : "photo"} ${i + 1}`}
-              >
-                {video ? (
-                  <video
-                    src={src}
-                    muted
-                    loop
-                    playsInline
-                    preload="metadata"
-                    tabIndex={-1}
-                  />
-                ) : (
-                  <img src={src} alt={`Zukerino Pastry Shop photo ${i + 1}`} loading="lazy" />
-                )}
-                <span
-                  className={`gallery__zoom ${video ? "gallery__zoom--play" : ""}`}
-                  aria-hidden="true"
-                >
-                  {video ? "▶" : "+"}
-                </span>
-              </button>
-            );
-          })}
+          {gallery.map((src, i) => (
+            <button
+              key={src}
+              className={`gallery__item gallery__item--${(i % 7) + 1}`}
+              onClick={() => setIndex(i)}
+              aria-label={`View photo ${i + 1}`}
+            >
+              <span className="gallery__photo">
+                <img src={src} alt={`Zukerino Pastry Shop photo ${i + 1}`} loading="lazy" />
+                <span className="gallery__zoom" aria-hidden="true">+</span>
+              </span>
+            </button>
+          ))}
         </div>
       </div>
 
@@ -96,7 +76,7 @@ export default function Gallery() {
           onTouchStart={onTouchStart}
           onTouchEnd={onTouchEnd}
         >
-          <button className="lightbox__close" aria-label="Close" onClick={close} ref={closeBtn}>
+          <button className="lightbox__close" aria-label="Close" onClick={close}>
             ×
           </button>
           <button
@@ -110,17 +90,7 @@ export default function Gallery() {
             ‹
           </button>
           <figure className="lightbox__figure" onClick={(e) => e.stopPropagation()}>
-            {isVideo(gallery[index]) ? (
-              <video
-                src={gallery[index]}
-                controls
-                autoPlay
-                playsInline
-                aria-label={`Zukerino Pastry Shop video ${index + 1}`}
-              />
-            ) : (
-              <img src={gallery[index]} alt={`Zukerino Pastry Shop photo ${index + 1}`} />
-            )}
+            <img src={gallery[index]} alt={`Zukerino Pastry Shop photo ${index + 1}`} />
             <figcaption>
               {index + 1} / {gallery.length}
             </figcaption>

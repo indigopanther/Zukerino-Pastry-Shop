@@ -1,6 +1,6 @@
 import { business, reviews } from "../data";
 
-const AVATAR_COLORS = ["#7c2235", "#a06f1f", "#3d6b4f", "#39557e", "#8a4f17", "#5d4a7e"];
+const AVATAR_COLORS = ["#047e96", "#7c2235", "#a06f1f", "#3d6b4f", "#39557e", "#8a4f17"];
 
 function initials(name) {
   return name
@@ -60,14 +60,16 @@ export default function Reviews() {
             </div>
           </div>
 
-          <a
-            className="reviews__all"
-            href={business.mapsLink}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Read all reviews on Google →
-          </a>
+          <div>
+            <a
+              className="reviews__all"
+              href={business.mapsLink}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Read all reviews on Google →
+            </a>
+          </div>
         </div>
 
         <div className="reviews__grid">
@@ -88,9 +90,7 @@ export default function Reviews() {
                   <strong>{r.name}</strong>
                   <small>{r.date}</small>
                 </span>
-                <span className="quote__g" title="Posted on Google">
-                  <GoogleG />
-                </span>
+                <GoogleG />
               </figcaption>
               <Stars count={r.rating} />
               <blockquote>{r.text}</blockquote>

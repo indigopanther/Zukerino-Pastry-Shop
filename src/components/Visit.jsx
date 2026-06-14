@@ -4,7 +4,7 @@ const today = new Date().toLocaleDateString("en-US", { weekday: "long" });
 
 export default function Visit() {
   return (
-    <section id="visit" className="section visit">
+    <section id="visit" className="section section--tint visit">
       <div className="container visit__grid">
         <div className="visit__info reveal">
           <p className="eyebrow">Visit Us</p>
