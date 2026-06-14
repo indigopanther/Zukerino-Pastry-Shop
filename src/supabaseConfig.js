@@ -7,11 +7,11 @@
 // (VITE_SUPABASE_URL / VITE_SUPABASE_ANON_KEY); otherwise these defaults are used.
 
 export const SUPABASE_URL =
-  import.meta.env.VITE_SUPABASE_URL || "https://oightjxuugjsqcvuidnn.supabase.co";
+  import.meta.env.VITE_SUPABASE_URL || "https://gwynnkujfvvwhmccrlxj.supabase.co";
 
 export const SUPABASE_ANON_KEY =
   import.meta.env.VITE_SUPABASE_ANON_KEY ||
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9pZ2h0anh1dWdqc3FjdnVpZG5uIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAzMzg5NDQsImV4cCI6MjA5NTkxNDk0NH0.3Tza5DzQowkTMaXG5_5egHh-sfVAhJTO1oL4WokfArc";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd3eW5ua3VqZnZ2d2htY2NybHhqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE0NDgxMTEsImV4cCI6MjA5NzAyNDExMX0.jPPM_G3QxFzygnezVUurlghwn7tz0cR_tlpPOMOYV-0";
 
 export const MENU_TABLE = "zukerino_menu_items";
 export const SAVE_FUNCTION = "zukerino-save-menu";
