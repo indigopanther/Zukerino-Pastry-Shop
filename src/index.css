@@ -242,17 +242,18 @@ a:focus-visible, button:focus-visible {
 .nav__links > a:hover { color: var(--teal-ink); }
 .nav__links > a:hover::after { width: 100%; }
 .nav__cta {
-  padding: 12px 22px;
+  padding: 12px 26px;
   white-space: nowrap;
-  letter-spacing: .09em;
+  letter-spacing: .1em;
   color: #fff;
   background: var(--teal-ink);
-  box-shadow: 0 8px 22px rgba(6,96,111,.30);
+  border-color: transparent;
+  box-shadow: 0 6px 16px rgba(6,96,111,.24);
 }
 .nav__cta:hover {
   background: var(--ink);
   color: #fff;
-  box-shadow: 0 10px 26px rgba(36,28,18,.32);
+  box-shadow: 0 10px 24px rgba(36,28,18,.28);
 }
 .nav--hero .nav__links > a { color: #fff; }
 .nav--hero .nav__links > a:hover { color: #fff; }
@@ -695,8 +696,9 @@ a.visit__value:hover { color: var(--teal-ink); }
     transform: translateX(100%); transition: transform .35s ease; z-index: 70;
   }
   .nav__links.is-open { transform: translateX(0); }
-  .nav__links > a { color: var(--ink) !important; font-size: 1.1rem; }
-  .nav--hero .nav__links > a { color: var(--ink) !important; }
+  .nav__links > a:not(.nav__cta) { color: var(--ink) !important; font-size: 1.1rem; }
+  .nav--hero .nav__links > a:not(.nav__cta) { color: var(--ink) !important; }
+  .nav__cta { color: #fff !important; align-self: stretch; text-align: center; margin-top: 6px; }
   .nav__toggle {
     display: flex; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer;
     z-index: 80; padding: 8px;
@@ -768,6 +770,7 @@ a.visit__value:hover { color: var(--teal-ink); }
 .adm__progress { display: flex; gap: 18px; font-size: .82rem; color: var(--muted); margin-left: auto; }
 .adm__progress b { color: var(--ink); }
 .adm__saved { color: var(--teal-ink); font-weight: 600; }
+.adm__saved.is-error { color: #c0392b; }
 .adm__actions { display: flex; gap: 10px; }
 .adm__btn { padding: 11px 20px; font-size: .72rem; }
 

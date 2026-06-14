@@ -1,7 +1,15 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { CATEGORIES, DIETS } from "../menuData";
 import { DietIcon } from "../diet";
-import { loadItems, saveItems, resetItems, exportDataFile } from "../menuStore";
+import {
+  loadItems,
+  fetchItems,
+  saveItems,
+  resetItems,
+  exportDataFile,
+  setAdminPin,
+  subscribeStatus,
+} from "../menuStore";
 
 const PIN = "30338";
 
@@ -13,6 +21,7 @@ function Gate({ onUnlock }) {
     e.preventDefault();
     if (pin === PIN) {
       try { sessionStorage.setItem("zk_admin_ok", "1"); } catch { /* noop */ }
+      setAdminPin(pin); // needed to authorize saves to the live menu
       onUnlock();
     } else {
       setErr(true);
@@ -50,13 +59,20 @@ export default function Admin() {
   });
   const [items, setItems] = useState(loadItems);
   const [filter, setFilter] = useState("All");
-  const [saved, setSaved] = useState(false);
+  const [status, setStatus] = useState("idle");
+
+  // Pull the current published menu from Supabase, and reflect save status.
+  useEffect(() => {
+    let alive = true;
+    fetchItems().then((srv) => { if (alive) setItems(srv); });
+    const unsub = subscribeStatus(setStatus);
+    return () => { alive = false; unsub(); };
+  }, []);
 
   const update = (id, field, value) => {
     const next = items.map((i) => (i.id === id ? { ...i, [field]: value } : i));
     setItems(next);
-    saveItems(next);
-    setSaved(true);
+    saveItems(next); // optimistic + debounced publish to the live menu
   };
 
   const toggleDiet = (id, key) => {
@@ -85,12 +101,18 @@ export default function Admin() {
     URL.revokeObjectURL(url);
   };
 
-  const reset = () => {
-    if (window.confirm("Clear every name, price, description and featured mark? This cannot be undone.")) {
-      resetItems();
-      setItems(loadItems());
+  const reset = async () => {
+    if (window.confirm("Clear every name, price, description and featured mark for ALL visitors? This cannot be undone.")) {
+      const items = await resetItems();
+      setItems(items);
     }
   };
+
+  const statusLabel =
+    status === "saving" ? "Saving…" :
+    status === "saved" ? "Saved ✓ · live" :
+    status === "error" ? "Save failed — retry" :
+    "Edits save live";
 
   if (!ok) return <Gate onUnlock={() => setOk(true)} />;
 
@@ -104,11 +126,11 @@ export default function Admin() {
           <div className="adm__progress">
             <span><b>{stats.named}</b>/{stats.total} named</span>
             <span><b>{stats.featured}</b> featured</span>
-            <span className="adm__saved">{saved ? "Saved ✓" : "Auto-saves"}</span>
+            <span className={`adm__saved ${status === "error" ? "is-error" : ""}`}>{statusLabel}</span>
           </div>
           <div className="adm__actions">
             <a href="#top" className="btn btn-ghost adm__btn">View site</a>
-            <button onClick={download} className="btn btn-primary adm__btn">Download data file</button>
+            <button onClick={download} className="btn btn-ghost adm__btn">Backup file</button>
           </div>
         </div>
       </header>
@@ -116,10 +138,10 @@ export default function Admin() {
       <div className="container adm__body">
         <p className="adm__help">
           Look at each photo and fill in its <b>name</b>, <b>price</b>, and a short
-          <b> description</b>. Tick <b>Featured</b> to spotlight it on the site. Changes
-          save automatically in this browser. When you're done, click
-          <b> Download data file</b> and send it to whoever updates the website to make
-          it live for everyone.
+          <b> description</b>. Tick <b>Featured</b> to spotlight it on the site.
+          Every change <b>saves automatically and goes live on the website for everyone</b> —
+          there's nothing to send to anyone. The <b>Backup file</b> button is optional, just
+          for keeping your own copy.
         </p>
 
         <div className="adm__filters">

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { CATEGORIES } from "../menuData";
 import { DietIcon, MenuKey } from "../diet";
-import { loadItems, subscribe } from "../menuStore";
+import { loadItems, subscribe, fetchItems } from "../menuStore";
 import { business } from "../data";
 
 function MenuItem({ item }) {
@@ -39,7 +39,11 @@ function MenuItem({ item }) {
 export default function Menu() {
   const [items, setItems] = useState(loadItems);
   const [active, setActive] = useState("featured-or-first");
-  useEffect(() => subscribe(setItems), []);
+  useEffect(() => {
+    const unsub = subscribe(setItems);
+    fetchItems(); // pull the latest published menu from Supabase on load
+    return unsub;
+  }, []);
 
   const featured = items.filter((i) => i.featured);
   const cats = CATEGORIES.map((name) => ({
