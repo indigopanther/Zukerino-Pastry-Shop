@@ -10,17 +10,9 @@ echo
 # Clear any stale git lock left by an interrupted process.
 rm -f .git/index.lock
 
-git add \
-  index.html \
-  src/main.jsx \
-  src/components/Admin.jsx \
-  src/components/Menu.jsx \
-  src/hooks/useReveal.js \
-  src/index.css \
-  src/menuData.js \
-  src/menuStore.js
+git add -A
 
-git commit -m "Menu loads immediately on mobile; fix category bar; Cakes & Cheesecakes, add/delete, remove lock"
+git commit -m "Menu fixes, nav drawer fix, start on Cakes, remove DSC_1820"
 git push
 
 echo

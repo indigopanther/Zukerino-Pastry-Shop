@@ -35,7 +35,7 @@ export default function Navbar() {
           <img
             className="nav__logo"
             src={scrolled ? "/assets/zukerino-dark.png" : "/assets/zukerino-light.png"}
-            alt="Zukerino"
+            alt="Zukerino Pastry Shop — Greek & Italian bakery in Atlanta, GA"
           />
         </a>
 

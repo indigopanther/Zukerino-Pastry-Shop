@@ -83,13 +83,27 @@ export const gallery = [
   "/img/place/DSC_1821.jpg",
   "/img/place/DSC_1816.jpg",
   "/img/place/DSC_1827.jpg",
-  "/img/place/DSC_1820.jpg",
   "/img/place/DSC_1825.jpg",
   "/img/place/DSC_1826.jpg",
   "/img/place/DSC_1829.jpg",
   "/img/place/DSC_1819.jpg",
   "/img/place/DSC_1818.jpg",
   "/img/place/DSC_1828.jpg",
+];
+
+// Descriptive alt text for each gallery image (keyword-rich for SEO).
+// Falls back to a generic description if an image has no entry.
+export const galleryAlt = [
+  "Display case of fresh Greek and Italian pastries at Zukerino Pastry Shop in Atlanta, GA",
+  "Custom decorated cakes at Zukerino Pastry Shop, a family-owned bakery in Atlanta",
+  "Trays of baklava and cannoli baked fresh at Zukerino Pastry Shop",
+  "Assorted cookies and desserts in the case at Zukerino Pastry Shop, Atlanta",
+  "Greek and Italian cakes and cheesecakes at Zukerino Pastry Shop",
+  "Seating area inside Zukerino Pastry Shop on Cotillion Drive in Atlanta",
+  "Fresh-baked pastries and pies at Zukerino Pastry Shop, Atlanta GA",
+  "Tiramisu and chocolate mousse cakes at Zukerino Pastry Shop",
+  "Counter and display at the family-owned Zukerino Pastry Shop in Atlanta",
+  "Boxed pastries and cakes ready to go at Zukerino Pastry Shop",
 ];
 
 export const heroSlides = [

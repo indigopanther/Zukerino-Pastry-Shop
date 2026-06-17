@@ -1,5 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { gallery } from "../data";
+import { gallery, galleryAlt } from "../data";
+
+const altFor = (i) =>
+  galleryAlt[i] || "Pastries and desserts at Zukerino Pastry Shop in Atlanta, GA";
 
 export default function Gallery() {
   const [index, setIndex] = useState(null);
@@ -56,10 +59,10 @@ export default function Gallery() {
               key={src}
               className={`gallery__item gallery__item--${(i % 7) + 1}`}
               onClick={() => setIndex(i)}
-              aria-label={`View photo ${i + 1}`}
+              aria-label={`View larger: ${altFor(i)}`}
             >
               <span className="gallery__photo">
-                <img src={src} alt={`Zukerino Pastry Shop photo ${i + 1}`} loading="lazy" />
+                <img src={src} alt={altFor(i)} loading="lazy" />
                 <span className="gallery__zoom" aria-hidden="true">+</span>
               </span>
             </button>
@@ -90,7 +93,7 @@ export default function Gallery() {
             ‹
           </button>
           <figure className="lightbox__figure" onClick={(e) => e.stopPropagation()}>
-            <img src={gallery[index]} alt={`Zukerino Pastry Shop photo ${index + 1}`} />
+            <img src={gallery[index]} alt={altFor(index)} />
             <figcaption>
               {index + 1} / {gallery.length}
             </figcaption>
