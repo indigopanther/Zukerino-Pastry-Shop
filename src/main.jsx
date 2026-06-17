@@ -5,8 +5,6 @@ import App from './App.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <FigmentLock siteId="977841b1-f003-44ca-b3c3-d67b745a49b1">
-      <App />
-    </FigmentLock>
+    <App />
   </StrictMode>,
 )

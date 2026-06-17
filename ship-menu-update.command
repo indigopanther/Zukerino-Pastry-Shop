@@ -11,13 +11,15 @@ echo
 rm -f .git/index.lock
 
 git add \
+  index.html \
+  src/main.jsx \
   src/components/Admin.jsx \
   src/hooks/useReveal.js \
   src/index.css \
   src/menuData.js \
   src/menuStore.js
 
-git commit -m "Menu: Cakes & Cheesecakes, mobile load fix, add/delete products"
+git commit -m "Menu: Cakes & Cheesecakes, mobile load fix, add/delete products; remove Figment lock"
 git push
 
 echo
