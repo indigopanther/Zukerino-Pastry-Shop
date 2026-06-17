@@ -38,7 +38,7 @@ function MenuItem({ item }) {
 
 export default function Menu() {
   const [items, setItems] = useState(loadItems);
-  const [active, setActive] = useState("featured-or-first");
+  const [active, setActive] = useState(null);
   useEffect(() => {
     const unsub = subscribe(setItems);
     fetchItems(); // pull the latest published menu from Supabase on load
@@ -56,6 +56,10 @@ export default function Menu() {
     ...(featured.length ? [{ name: "Featured", id: "featured", items: featured }] : []),
     ...cats,
   ];
+
+  // Highlight the first category (Cakes & Cheesecakes) on load until the
+  // visitor picks another, so the menu visibly "starts on Cakes."
+  const activeId = active ?? (sections[0] && sections[0].id);
 
   const jump = (e, id) => {
     e.preventDefault();
@@ -101,7 +105,7 @@ export default function Menu() {
           {sections.map((s) => (
             <button
               key={s.id}
-              className={`menu__chip ${active === s.id ? "is-active" : ""}`}
+              className={`menu__chip ${activeId === s.id ? "is-active" : ""}`}
               onClick={(e) => jump(e, s.id)}
             >
               {s.name}
