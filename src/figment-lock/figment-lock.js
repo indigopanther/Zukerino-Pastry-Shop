@@ -96,7 +96,7 @@
             '<path d="M12 16.5v1.8"/>' +
           '</svg>' +
         '</div>' +
-        '<h1 class="figlock-title figlock-fade" style="animation-delay:.18s">' + esc(info.title || 'Locked by Figment') + '</h1>' +
+        '<h1 class="figlock-title figlock-fade" style="animation-delay:.18s">' + esc(info.title || 'Website Unavailable') + '</h1>' +
         (info.message
           ? '<p class="figlock-msg figlock-fade" style="animation-delay:.26s">' + esc(info.message) + '</p>'
           : '') +
@@ -123,7 +123,7 @@
   }
 
   function check() {
-    fetch(ENDPOINT + '?site=' + encodeURIComponent(siteId), { cache: 'no-store' })
+    fetch(ENDPOINT + '?site=' + encodeURIComponent(siteId) + '&t=' + Date.now(), { cache: 'no-store' })
       .then(function (r) {
         if (!r.ok) throw new Error('status ' + r.status)
         return r.json()

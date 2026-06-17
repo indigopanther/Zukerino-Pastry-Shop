@@ -1,7 +1,7 @@
 # Figment Lock — remote site kill-switch
 
 Lets Figment Imaginative remotely **lock** a client site (replace it with a
-"Locked by Figment" screen) and **unlock** it, straight from the Studio admin:
+"Website Unavailable" screen) and **unlock** it, straight from the Studio admin:
 **Sites → Manage → Live site lock**. The client site checks its status on load
 and every 60s.
 
@@ -58,11 +58,11 @@ Add one line before `</body>`:
 
 ## The lock screen
 
-Full-white screen with a lock icon, **Locked by Figment**, the billing message,
+Full-white screen with a lock icon, **Website Unavailable**, the message,
 your phone number, and a link back to https://www.figmentimaginative.com:
 
-> **Locked by Figment**
-> Due to billing and processing errors, this site has been locked.
+> **Website Unavailable**
+> Due to an error, this website is currently unavailable. Please check back shortly.
 > Please call 678-920-2287 for assistance.
 
 The wording lives server-side in the `site-lock` Edge Function, so it's

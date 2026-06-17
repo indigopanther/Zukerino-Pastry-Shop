@@ -1,0 +1,70 @@
+// All product photos as menu items. Names are intentionally BLANK — the owner
+// fills them in on the admin page (/#admin). `diets` holds dietary flags shown
+// as symbols on the public menu. Constants live here so component files stay clean.
+
+export const CATEGORIES = [
+  "Cakes", "Cheesecakes", "Baklava", "Cookies",
+  "Pastries", "Party Trays", "Pies", "Other",
+];
+
+// Dietary attributes + the colors used for their menu symbols.
+export const DIETS = [
+  { key: "gluten-free", label: "Gluten-Free", color: "#7a8b2e" },
+  { key: "vegan", label: "Vegan", color: "#3f7d4f" },
+  { key: "dairy-free", label: "Dairy-Free", color: "#047e96" },
+  { key: "non-gmo", label: "Non-GMO", color: "#4a7c3f" },
+];
+
+export const DEFAULT_ITEMS = [
+  { id: "DSC_1764", img: "/img/products/DSC_1764.jpg", name: "", price: "", desc: "", featured: false, category: "Cookies", diets: [] },
+  { id: "DSC_1765", img: "/img/products/DSC_1765.jpg", name: "", price: "", desc: "", featured: false, category: "Cookies", diets: [] },
+  { id: "DSC_1766", img: "/img/products/DSC_1766.jpg", name: "", price: "", desc: "", featured: false, category: "Cookies", diets: [] },
+  { id: "DSC_1767", img: "/img/products/DSC_1767.jpg", name: "", price: "", desc: "", featured: false, category: "Cookies", diets: [] },
+  { id: "DSC_1768", img: "/img/products/DSC_1768.jpg", name: "", price: "", desc: "", featured: false, category: "Cookies", diets: [] },
+  { id: "DSC_1769", img: "/img/products/DSC_1769.jpg", name: "", price: "", desc: "", featured: false, category: "Cookies", diets: [] },
+  { id: "DSC_1772", img: "/img/products/DSC_1772.jpg", name: "", price: "", desc: "", featured: false, category: "Cookies", diets: [] },
+  { id: "DSC_1776", img: "/img/products/DSC_1776.jpg", name: "", price: "", desc: "", featured: false, category: "Cookies", diets: [] },
+  { id: "DSC_1770", img: "/img/products/DSC_1770.jpg", name: "", price: "", desc: "", featured: false, category: "Baklava", diets: [] },
+  { id: "DSC_1771", img: "/img/products/DSC_1771.jpg", name: "", price: "", desc: "", featured: false, category: "Baklava", diets: [] },
+  { id: "DSC_1774", img: "/img/products/DSC_1774.jpg", name: "", price: "", desc: "", featured: false, category: "Baklava", diets: [] },
+  { id: "DSC_1775", img: "/img/products/DSC_1775.jpg", name: "", price: "", desc: "", featured: false, category: "Baklava", diets: [] },
+  { id: "DSC_1778", img: "/img/products/DSC_1778.jpg", name: "", price: "", desc: "", featured: false, category: "Baklava", diets: [] },
+  { id: "DSC_1779", img: "/img/products/DSC_1779.jpg", name: "", price: "", desc: "", featured: false, category: "Baklava", diets: [] },
+  { id: "DSC_1777", img: "/img/products/DSC_1777.jpg", name: "", price: "", desc: "", featured: false, category: "Pastries", diets: [] },
+  { id: "DSC_1781", img: "/img/products/DSC_1781.jpg", name: "", price: "", desc: "", featured: false, category: "Pastries", diets: [] },
+  { id: "DSC_1782", img: "/img/products/DSC_1782.jpg", name: "", price: "", desc: "", featured: false, category: "Pastries", diets: [] },
+  { id: "DSC_1773", img: "/img/products/DSC_1773.jpg", name: "", price: "", desc: "", featured: false, category: "Party Trays", diets: [] },
+  { id: "DSC_1780", img: "/img/products/DSC_1780.jpg", name: "", price: "", desc: "", featured: false, category: "Cakes", diets: [] },
+  { id: "DSC_1783", img: "/img/products/DSC_1783.jpg", name: "", price: "", desc: "", featured: false, category: "Cakes", diets: [] },
+  { id: "DSC_1784", img: "/img/products/DSC_1784.jpg", name: "", price: "", desc: "", featured: false, category: "Cakes", diets: [] },
+  { id: "DSC_1785", img: "/img/products/DSC_1785.jpg", name: "", price: "", desc: "", featured: false, category: "Cakes", diets: [] },
+  { id: "DSC_1786", img: "/img/products/DSC_1786.jpg", name: "", price: "", desc: "", featured: false, category: "Cakes", diets: [] },
+  { id: "DSC_1787", img: "/img/products/DSC_1787.jpg", name: "", price: "", desc: "", featured: false, category: "Cakes", diets: [] },
+  { id: "DSC_1788", img: "/img/products/DSC_1788.jpg", name: "", price: "", desc: "", featured: false, category: "Cakes", diets: [] },
+  { id: "DSC_1790", img: "/img/products/DSC_1790.jpg", name: "", price: "", desc: "", featured: false, category: "Cakes", diets: [] },
+  { id: "DSC_1791", img: "/img/products/DSC_1791.jpg", name: "", price: "", desc: "", featured: false, category: "Cakes", diets: [] },
+  { id: "DSC_1792", img: "/img/products/DSC_1792.jpg", name: "", price: "", desc: "", featured: false, category: "Cakes", diets: [] },
+  { id: "DSC_1793", img: "/img/products/DSC_1793.jpg", name: "", price: "", desc: "", featured: false, category: "Cakes", diets: [] },
+  { id: "DSC_1794", img: "/img/products/DSC_1794.jpg", name: "", price: "", desc: "", featured: false, category: "Cakes", diets: [] },
+  { id: "DSC_1795", img: "/img/products/DSC_1795.jpg", name: "", price: "", desc: "", featured: false, category: "Cakes", diets: [] },
+  { id: "DSC_1796", img: "/img/products/DSC_1796.jpg", name: "", price: "", desc: "", featured: false, category: "Cakes", diets: [] },
+  { id: "DSC_1797", img: "/img/products/DSC_1797.jpg", name: "", price: "", desc: "", featured: false, category: "Cakes", diets: [] },
+  { id: "DSC_1798", img: "/img/products/DSC_1798.jpg", name: "", price: "", desc: "", featured: false, category: "Cakes", diets: [] },
+  { id: "DSC_1799", img: "/img/products/DSC_1799.jpg", name: "", price: "", desc: "", featured: false, category: "Cakes", diets: [] },
+  { id: "DSC_1800", img: "/img/products/DSC_1800.jpg", name: "", price: "", desc: "", featured: false, category: "Cakes", diets: [] },
+  { id: "DSC_1801", img: "/img/products/DSC_1801.jpg", name: "", price: "", desc: "", featured: false, category: "Cakes", diets: [] },
+  { id: "DSC_1802", img: "/img/products/DSC_1802.jpg", name: "", price: "", desc: "", featured: false, category: "Cakes", diets: [] },
+  { id: "DSC_1803", img: "/img/products/DSC_1803.jpg", name: "", price: "", desc: "", featured: false, category: "Cakes", diets: [] },
+  { id: "DSC_1804", img: "/img/products/DSC_1804.jpg", name: "", price: "", desc: "", featured: false, category: "Cakes", diets: [] },
+  { id: "DSC_1805", img: "/img/products/DSC_1805.jpg", name: "", price: "", desc: "", featured: false, category: "Cakes", diets: [] },
+  { id: "DSC_1806", img: "/img/products/DSC_1806.jpg", name: "", price: "", desc: "", featured: false, category: "Cakes", diets: [] },
+  { id: "DSC_1807", img: "/img/products/DSC_1807.jpg", name: "", price: "", desc: "", featured: false, category: "Cakes", diets: [] },
+  { id: "DSC_1808", img: "/img/products/DSC_1808.jpg", name: "", price: "", desc: "", featured: false, category: "Cakes", diets: [] },
+  { id: "DSC_1809", img: "/img/products/DSC_1809.jpg", name: "", price: "", desc: "", featured: false, category: "Cakes", diets: [] },
+  { id: "DSC_1810", img: "/img/products/DSC_1810.jpg", name: "", price: "", desc: "", featured: false, category: "Cakes", diets: [] },
+  { id: "DSC_1811", img: "/img/products/DSC_1811.jpg", name: "", price: "", desc: "", featured: false, category: "Cakes", diets: [] },
+  { id: "DSC_1812", img: "/img/products/DSC_1812.jpg", name: "", price: "", desc: "", featured: false, category: "Cakes", diets: [] },
+  { id: "DSC_1813", img: "/img/products/DSC_1813.jpg", name: "", price: "", desc: "", featured: false, category: "Cakes", diets: [] },
+  { id: "DSC_1814", img: "/img/products/DSC_1814.jpg", name: "", price: "", desc: "", featured: false, category: "Cakes", diets: [] },
+  { id: "DSC_1815", img: "/img/products/DSC_1815.jpg", name: "", price: "", desc: "", featured: false, category: "Cakes", diets: [] },
+];

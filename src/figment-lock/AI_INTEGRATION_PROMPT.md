@@ -1,5 +1,5 @@
 You are integrating the "Figment Lock" remote kill-switch into a client website.
-This lets Figment Imaginative remotely show a "Locked by Figment" screen on the
+This lets Figment Imaginative remotely show a "Website Unavailable" screen on the
 site (e.g. for billing issues). Follow these rules exactly.
 
 ## The API (read-only, public, keyless)

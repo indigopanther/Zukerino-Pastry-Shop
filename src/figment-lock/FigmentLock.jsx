@@ -56,7 +56,7 @@ export default function FigmentLock({
     const check = async () => {
       try {
         const res = await fetch(
-          `${endpoint}?site=${encodeURIComponent(id)}`,
+          `${endpoint}?site=${encodeURIComponent(id)}&t=${Date.now()}`,
           { cache: 'no-store' },
         )
         if (!res.ok) throw new Error(`status ${res.status}`)
@@ -64,7 +64,7 @@ export default function FigmentLock({
         if (!alive) return
         if (data.locked) {
           setLock({
-            title: data.title || 'Locked by Figment',
+            title: data.title || 'Website Unavailable',
             message: data.message || '',
             phone: data.phone || '',
           })
@@ -121,7 +121,7 @@ function LockScreen({ title, message, phone }) {
         </div>
 
         <h1 className="figlock-title figlock-fade" style={{ animationDelay: '.18s' }}>
-          {title || 'Locked by Figment'}
+          {title || 'Website Unavailable'}
         </h1>
 
         {message && (

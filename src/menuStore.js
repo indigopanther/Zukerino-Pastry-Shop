@@ -22,6 +22,18 @@ const STATUS_EVT = "zukerino-menu-sync";
 
 /* ------------------------------------------------------------------ helpers */
 
+// Older menus stored cakes and cheesecakes as two separate categories; we now
+// show them together. Normalising on read means the rename is purely front-end:
+// rows can keep their original category value and still group correctly, so the
+// menu never breaks regardless of when this code is deployed.
+const CATEGORY_ALIASES = {
+  Cakes: "Cakes & Cheesecakes",
+  Cheesecakes: "Cakes & Cheesecakes",
+};
+function normCat(c) {
+  return CATEGORY_ALIASES[c] || c || "Other";
+}
+
 // Map a database row (column `description`) to the app shape (`desc`).
 function fromRow(r) {
   return {
@@ -31,27 +43,9 @@ function fromRow(r) {
     price: r.price ?? "",
     desc: r.description ?? "",
     featured: !!r.featured,
-    category: r.category || "Other",
+    category: normCat(r.category),
     diets: Array.isArray(r.diets) ? r.diets : [],
   };
-}
-
-// Merge edits (from server or cache) onto the bundled default list by id, so the
-// photo, category and ordering always come from the code and never go missing.
-function merge(saved) {
-  const map = new Map((saved || []).map((i) => [i.id, i]));
-  return DEFAULT_ITEMS.map((d) => {
-    const s = map.get(d.id) || {};
-    return {
-      ...d,
-      name: s.name ?? "",
-      price: s.price ?? "",
-      desc: s.desc ?? "",
-      featured: !!s.featured,
-      category: s.category || d.category,
-      diets: Array.isArray(s.diets) ? s.diets : d.diets || [],
-    };
-  });
 }
 
 function readCache() {
@@ -94,9 +88,12 @@ function getAdminPin() {
 
 /* ----------------------------------------------------------------- read path */
 
-// Synchronous, instant: cached edits (or blank defaults) for first paint.
+// Synchronous, instant: the cached live menu (or the bundled seed for a brand-
+// new visitor) so the page can paint before the network responds.
 export function loadItems() {
-  return merge(readCache());
+  const cache = readCache();
+  const items = Array.isArray(cache) && cache.length ? cache : DEFAULT_ITEMS;
+  return items.map((i) => ({ ...i, category: normCat(i.category) }));
 }
 
 // Async: fetch the published menu from Supabase, refresh the cache, and notify
@@ -109,7 +106,9 @@ export async function fetchItems() {
     );
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const rows = await res.json();
-    const items = merge(rows.map(fromRow));
+    // Supabase is the source of truth — render exactly what's published, so
+    // items can be added or removed by the owner and show up everywhere.
+    const items = rows.map(fromRow);
     writeCache(items);
     window.dispatchEvent(new CustomEvent(EVT, { detail: items }));
     return items;
@@ -177,6 +176,45 @@ export async function resetItems() {
     emitStatus("error");
     console.error("Menu reset failed:", e);
     return loadItems();
+  }
+}
+
+/* ------------------------------------------------------------- add / delete */
+
+// Add a brand-new product. `fields` = { name, price, desc, category, diets,
+// featured }; `imageDataUrl` is a (compressed) data: URL the edge function
+// uploads to Storage. The new item then behaves exactly like an imported one.
+export async function addItem(fields, imageDataUrl) {
+  emitStatus("saving");
+  try {
+    await callFunction({ action: "add", item: fields, image: imageDataUrl });
+    const items = await fetchItems(); // refresh truth + notify the live menu
+    emitStatus("saved");
+    return items;
+  } catch (e) {
+    emitStatus("error");
+    console.error("Add product failed:", e);
+    throw e;
+  }
+}
+
+// Permanently remove a product (and, if it was an uploaded photo, its image).
+export async function deleteItem(id) {
+  // optimistic: drop it from the cache + live menu right away
+  const next = loadItems().filter((i) => i.id !== id);
+  writeCache(next);
+  window.dispatchEvent(new CustomEvent(EVT, { detail: next }));
+
+  emitStatus("saving");
+  try {
+    await callFunction({ action: "delete", id });
+    const items = await fetchItems();
+    emitStatus("saved");
+    return items;
+  } catch (e) {
+    emitStatus("error");
+    console.error("Delete product failed:", e);
+    return fetchItems(); // re-sync with server truth on failure
   }
 }
 
