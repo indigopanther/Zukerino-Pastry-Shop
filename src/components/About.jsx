@@ -16,7 +16,7 @@ export default function About() {
 
         <div className="about__copy reveal">
           <p className="eyebrow">Our Story</p>
-          <h2 className="section-title">A little corner of Europe in Atlanta</h2>
+          <h2 className="section-title">A little bit about us</h2>
           <p className="about__text">
             Zukerino is a small, <span className="hl">family-owned</span> wholesale and retail
             pastry shop on Cotillion Drive. The recipes are Greek and Italian — baklava, cannoli,
