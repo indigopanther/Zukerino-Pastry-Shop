@@ -723,7 +723,22 @@ a.visit__value:hover { color: var(--teal-ink); }
   .reviews__grid { grid-template-columns: 1fr; }
   .about__stats { grid-template-columns: 1fr; }
   .footer__grid { grid-template-columns: 1fr 1fr; gap: 36px; }
-  .menu__nav { top: 70px; }
+
+  /* Category bar: a tidy single-row, swipeable strip instead of a wrapping
+     pill cloud that looked broken on narrow screens. */
+  .menu__nav {
+    top: 70px;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    max-width: 100%;
+    overflow-x: auto;
+    border-radius: 16px;
+    padding: 10px 12px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .menu__nav::-webkit-scrollbar { display: none; }
+  .menu__chip { flex: 0 0 auto; white-space: nowrap; }
 }
 @media (max-width: 460px) {
   .footer__grid { grid-template-columns: 1fr; }

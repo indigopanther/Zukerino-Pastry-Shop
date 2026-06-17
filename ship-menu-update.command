@@ -14,12 +14,13 @@ git add \
   index.html \
   src/main.jsx \
   src/components/Admin.jsx \
+  src/components/Menu.jsx \
   src/hooks/useReveal.js \
   src/index.css \
   src/menuData.js \
   src/menuStore.js
 
-git commit -m "Menu: Cakes & Cheesecakes, mobile load fix, add/delete products; remove Figment lock"
+git commit -m "Menu loads immediately on mobile; fix category bar; Cakes & Cheesecakes, add/delete, remove lock"
 git push
 
 echo

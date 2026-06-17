@@ -69,7 +69,7 @@ export default function Menu() {
   return (
     <section id="menu" className="section menu">
       <div className="container">
-        <div className="menu__head reveal">
+        <div className="menu__head">
           <p className="eyebrow">The Menu</p>
           <h2 className="section-title">Everything in the case</h2>
           <p className="section-lead">
@@ -78,7 +78,7 @@ export default function Menu() {
           </p>
         </div>
 
-        <div className="menu__notes reveal">
+        <div className="menu__notes">
           <div className="menu__note">
             <span className="menu__note-ic" aria-hidden="true">◆</span>
             <p>
@@ -110,7 +110,7 @@ export default function Menu() {
         </nav>
 
         {sections.map((s) => (
-          <div key={s.id} id={`cat-${s.id}`} className="menu__cat reveal">
+          <div key={s.id} id={`cat-${s.id}`} className="menu__cat">
             <div className="menu__cat-head">
               <h3 className="menu__cat-title">{s.name}</h3>
               <span className="diamonds" aria-hidden="true">
@@ -125,7 +125,7 @@ export default function Menu() {
           </div>
         ))}
 
-        <p className="menu__cta reveal">
+        <p className="menu__cta">
           Want something for a birthday or party?{" "}
           <a href={business.phoneHref}>Call {business.phone}</a> — we love a good celebration.
         </p>

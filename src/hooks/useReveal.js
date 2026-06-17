@@ -29,7 +29,10 @@ export default function useReveal() {
           }
         });
       },
-      { threshold: 0.08, rootMargin: "0px 0px -5% 0px" }
+      // threshold 0 fires as soon as any sliver is visible. A larger value can
+      // never trigger for sections taller than the viewport (their max visible
+      // ratio is small), which would leave long sections stuck hidden on mobile.
+      { threshold: 0, rootMargin: "0px 0px -5% 0px" }
     );
 
     // Observe every reveal element not already shown (idempotent for repeats).
